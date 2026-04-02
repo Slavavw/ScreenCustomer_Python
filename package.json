@@ -1,0 +1,46 @@
+{
+   "name": "screen_monitor",
+   "version": "1.0.0",
+   "description": "babel-register Позволяет импортировать и транспилировать JSX на стороне сервера",
+   "main": "index.js",
+   "scripts": {
+      "test": "jest",
+      "start": "node server.js",
+      "dev": "set NODE_ENV=development&&webpack --watch ",
+      "complexdev": "concurrently \"set NODE_ENV=development&&webpack --watch \" \"nodemon server \"",
+      "server": "nodemon server",
+      "build": "set NODE_ENV=development&&webpack",
+      "Admin": "nodemon serverAdmin"
+   },
+   "author": "SlavaVW",
+   "license": "ISC",
+   "dependencies": {
+      "@babel/core": "^7.29.0",
+      "@babel/register": "^7.28.6",
+      "babel-loader": "^10.0.0",
+      "body-parser": "^2.2.2",
+      "concurrently": "^7.4.0",
+      "mime": "^3.0.0",
+      "nodemon": "^3.1.14",
+      "npm-run-all": "^4.1.5",
+      "react": "^15.7.0",
+      "react-dom": "^15.7.0",
+      "react-redux": "^4.4.10",
+      "react-router": "^2.8.1",
+      "redux": "^3.7.2",
+      "redux-actions": "^0.13.0",
+      "style-loader": "^4.0.0",
+      "webpack": "^5.105.2",
+      "webpack-cli": "^6.0.1",
+      "webpack-node-externals": "^3.0.0"
+   },
+   "devDependencies": {
+      "@babel/preset-env": "^7.29.0",
+      "@babel/preset-react": "^7.28.5",
+      "clean-webpack-plugin": "^4.0.0",
+      "colors": "^1.4.0",
+      "html-webpack-plugin": "^5.6.6",
+      "mini-css-extract-plugin": "^2.10.0",
+      "react-icons": "^5.5.0"
+   }
+}
