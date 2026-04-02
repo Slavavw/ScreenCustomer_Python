@@ -306,7 +306,7 @@ class TTD extends React.Component {
           <td
             ref='parent'
             style={{
-              backgroundImage: `url(${data})`,
+              backgroundImage: `url(${new URL(location + data)})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundOrigin: "border-box",

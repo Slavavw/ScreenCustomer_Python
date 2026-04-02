@@ -1,4 +1,6 @@
 source
 images
 cmd
+dist
+node_modules
 

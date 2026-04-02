@@ -85,7 +85,7 @@ class CTmpTable(FireberdPython):
             if not img == None:
                 with open( os.path.join(pth,f'{RUID_ML}.jpg'),"wb") as f:
                    f.write(img.read())
-                   img_pth = os.path.join(".","images","menu_name",f"{ID}.jpg")
+                   img_pth = os.path.join(pth,f'{RUID_ML}.jpg')
             arr[ID] = {
                 "count":count,
                 "dataRow":{key:value for key,value in zip(("RUID_ML","Цена","Сумма со скидкой","Сумма скидки","Active","Изделие","PHOTO"),
