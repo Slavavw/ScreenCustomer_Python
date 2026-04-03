@@ -7,7 +7,7 @@ if __name__ == "__main__":
     except Exception as err:        
         pth =  r"localhost/3054:C:\Волковыск Магазин\VOLKOVISK_CASH.GDB"
     
-    tblPreOrder = CTmpTable(pth,"USR$TEMP_PREORDER")
+    tblPreOrder = CTmpTable(pth,"USR_HTMLSCRN_PREORDER")
     if tblPreOrder.connect():
       tblPreOrder.createPreorder()
       tblPreOrder.connection.close()

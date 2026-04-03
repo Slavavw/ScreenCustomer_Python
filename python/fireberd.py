@@ -45,6 +45,7 @@ class FireberdPython():
         return init_path    
 
     def setValueType(self,key,value):
+        'приводит к типу значение данных по ключу словаря'
         if self.convert.get(key.upper(),False):
             if not isinstance(value,self.convert[key]):
                 try:
@@ -79,7 +80,16 @@ class FireberdPython():
             return bool(len(l))
         except Exception as err:
             print(err)
-            return False       
+            return False
+    
+    def delteTbl(self,TblName):
+        try:
+            select = f'drop table {TblName}'
+            self.cursor.execute(select)
+            self.connection.commit()
+        except Exception as err:
+            print(err)    
+       
 
 
 class ConvertClass():

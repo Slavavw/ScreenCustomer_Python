@@ -49,20 +49,19 @@ class CTmpTable(FireberdPython):
         self.TblName = TblName
     
     def createTablePreOrder(self):        
-        ''' создаем таблицы USR$TEMP_PREORDER '''        
+        ' создаем таблицу %s' % self.TblName
         if not self.isExists(self.TblName):            
             try:                
-                self.cursor.execute('''
-                                create Table USR$TEMP_PREORDER (
-                                    ID INT not null PRIMARY KEY, 
-                                    USR$quantity DECIMAL(15,4),
-                                    RUID_ML INT,
-                                    USR$PRICESALE DECIMAL(15,4),
-                                    USR$SUMWITHDISCOUNT DECIMAL(15,4),
-                                    USR$SUMDISCOUNT DECIMAL(15,4),
-                                    ActiveLine smallint
-                                    )
-                        ''')                
+                self.cursor.execute('create Table %s ( \
+                                    ID INT not null PRIMARY KEY, \
+                                    USR$quantity DECIMAL(15,4), \
+                                    RUID_ML INT, \
+                                    USR$PRICESALE DECIMAL(15,4), \
+                                    USR$SUMWITHDISCOUNT DECIMAL(15,4), \
+                                    USR$SUMDISCOUNT DECIMAL(15,4), \
+                                    ActiveLine smallint \
+                                    ) \
+                        ' % self.TblName)                
                 self.connection.commit()
             except Exception as err:
                 print(err)
@@ -75,9 +74,9 @@ class CTmpTable(FireberdPython):
                 select
                 p.ID,USR$quantity,RUID_ML,USR$PRICESALE,
                 USR$SUMWITHDISCOUNT,USR$SUMDISCOUNT, ActiveLine,g.name, g.usr$photo
-                from USR$TEMP_PREORDER p
+                from %s p
                 join gd_good g on g.id = p.ruid_ml
-                '''
+                ''' % self.TblName
         self.connection.begin()
         arr = dict()
         for  (ID,count,RUID_ML,PRICESALE,SUMWITHDISCOUNT,SUMDISCOUNT,ActiveLine,name,img) in self.cursor.execute(select):
@@ -105,18 +104,22 @@ import re as RegNum
 #pattern = RegNum.compile("(?P<RUID>(\d+_\d+))\bcount(?P<count>(\d+.*\d*))\bцена(?P<price>)")   
 
 
-if __name__ == "__main__":    
+if __name__ == "__main__": 
+    #name = "USR$TEMP_PREORDER"    
     try:
-        pth = r"%s" % sys.argv[1]        
+        pth = r"%s" % sys.argv[1]
+        name = "%s" % sys.argv[2]
     except Exception as err:        
         pth =  r"localhost/3054:C:\Волковыск Магазин\VOLKOVISK_CASH.GDB"
+        name = "USR_HTMLSCRN_PREORDER"
     
-    fb_ptn = CScreenCustomer(pth)            
+    print("arg 1", name)
+    fb_ptn = CScreenCustomer(pth)
     if fb_ptn.connect():        
         fb_ptn.createfolder(("cmd",))
         fb_ptn.loadBackground()
         fb_ptn.loadReklama()
-        tblPreOrder = CTmpTable(pth,"USR$TEMP_PREORDER")
+        tblPreOrder = CTmpTable(pth,name)
         if tblPreOrder.connect():
             tblPreOrder.createTablePreOrder()
             tblPreOrder.connection.close()
