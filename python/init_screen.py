@@ -83,9 +83,9 @@ class CTmpTable(FireberdPython):
         for  (ID,count,RUID_ML,PRICESALE,SUMWITHDISCOUNT,SUMDISCOUNT,ActiveLine,name,img) in self.cursor.execute(select):
             img_pth = None
             if not img == None:
-                with open( os.path.join(pth,f'{RUID_ML}.jpg'),"wb") as f:
+                with open( os.path.join(pth,f'{RUID_ML}.jpeg'),"wb") as f:
                    f.write(img.read())
-                   img_pth = os.path.join(pth,f'{RUID_ML}.jpg')
+                   img_pth = os.path.join(pth,f'{RUID_ML}.jpeg')
             arr[ID] = {
                 "count":count,
                 "dataRow":{key:value for key,value in zip(("RUID_ML","Цена","Сумма со скидкой","Сумма скидки","Active","Изделие","PHOTO"),
