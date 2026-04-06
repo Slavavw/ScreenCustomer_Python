@@ -103,7 +103,7 @@ let server = new http.Server();
 
 async function initPython(file, ...args) {
   //let pythonProcess = spawn("python", [`${path.join("./", "python", "initscreen.py")}`, database]);
-  let pythonProcess = spawn("python", [`${path.join("./", "python", file)}`, args]);
+  let pythonProcess = spawn("python", [`${path.join("./", "python", file)}`, ...args]);
 }
 
 async function StartBAT() {
