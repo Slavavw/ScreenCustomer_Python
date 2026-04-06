@@ -25,7 +25,7 @@ class CScreenCustomer(FireberdPython):
             with open(pth,"wb") as f:
               for fin  in self.cursor.execute(select):
                 for res in fin:
-                    f.write(res.read())
+                    f.write(res)
                     
 
         except Exception as err:
