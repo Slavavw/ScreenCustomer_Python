@@ -3,8 +3,7 @@
    "version": "1.0.0",
    "description": "babel-register Позволяет импортировать и транспилировать JSX на стороне сервера",
    "main": "index.js",
-   "scripts": {
-      "test": "jest",
+   "scripts": {      
       "start": "node server.js",
       "dev": "set NODE_ENV=development&&webpack --watch ",
       "complexdev": "concurrently \"set NODE_ENV=development&&webpack --watch \" \"nodemon server \"",

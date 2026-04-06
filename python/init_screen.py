@@ -3,6 +3,8 @@ import sys
 import json
 from collections import namedtuple
 from fireberd import FireberdPython
+from PIL import Image
+
 
 
 
@@ -13,17 +15,18 @@ class CScreenCustomer(FireberdPython):
     
     def loadBackground(self):
         try:
-            select =  '''select z.usr$photo as PHOTO 
+            select =  '''select z.usr$photo
                         from gd_ourcompany z  
                         JOIN gd_contact c ON c.id = z.companykey  
                         JOIN gd_company cmp on cmp.contactkey = z.companykey  
                     '''
-            self.connection.begin()
-            self.cursor.execute(select)
-            blob_data = self.cursor.fetchone()[0]
-            pth = os.path.join(self.createfolder(("images","background")),"background.jpg")
+            self.connection.begin()                        
+            pth = os.path.join(self.createfolder(("images","background")),"background.jpg")             
             with open(pth,"wb") as f:
-                f.write(blob_data.read())
+              for fin  in self.cursor.execute(select):
+                for res in fin:
+                    f.write(res.read())
+                    
 
         except Exception as err:
             print(err)

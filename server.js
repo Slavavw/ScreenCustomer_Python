@@ -103,7 +103,7 @@ let server = new http.Server();
 
 async function initPython(file, ...args) {
   //let pythonProcess = spawn("python", [`${path.join("./", "python", "initscreen.py")}`, database]);
-  let pythonProcess = spawn("python", [`${path.join("./", "python", file)}`, ...args]);
+  let pythonProcess = spawn("python", [`${path.join("./", "python", file)}`, args]);
 }
 
 async function StartBAT() {
@@ -119,7 +119,7 @@ async function StartBAT() {
         console.log(`Сервер запущен по адреcу: http://${IPv4}:${ServerPort}`.bgBrightGreen);
 
         // Запускаем Питон создаем бэкграунд экрана и подтягиваем файлы рекламы
-        await initPython("init_screen.py", database);
+        await initPython("init_screen.py", database, "USR_HTMLSCRN_PREORDER");
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@ организация генератора получения установленных на компе браузеров, первый будет edge
         let Browser = [
@@ -428,7 +428,7 @@ server.on("request", (request, response) => {
       streamRead.on("end", async () => {
         await response.writeHead(200, { "content-type": "text/html; chatset=utf-8" });
         let styleBkground =
-          '<style type="text/css">body{background-image:url(/images/background/background.jpg);background-repeat: no-repeat;background-position: left top;background-attachment: fixed;background-size: cover;}</style>';
+          '<style type="text/css">body{background-image:url(/images/background/background.jpg);background-repeat: no-repeat;background-origin: border-box; background-position: center center;background-attachment: fixed;background-size: 100vw 100vh;}</style>';
         stat(path.join(__dirname, "images", "background", "background.jpg"))
           .catch(() => {
             styleBkground = '<style type="text/css">body{background-image:url(/images/background_main.jpg);}</style>';
