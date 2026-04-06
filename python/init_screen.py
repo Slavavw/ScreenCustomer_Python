@@ -3,7 +3,6 @@ import sys
 import json
 from collections import namedtuple
 from fireberd import FireberdPython
-from PIL import Image
 
 
 
